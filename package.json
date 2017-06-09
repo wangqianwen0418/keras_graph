@@ -4,15 +4,15 @@
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "dev": "electron . --debug"
   },
   "repository": "https://github.com/wangqianwen0418/keras-graph",
   "keywords": [
     "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "keras",
+    "DNN",
+    "graph"
   ],
   "author": "GitHub",
   "license": "CC0-1.0",
