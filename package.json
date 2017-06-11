@@ -1,10 +1,10 @@
 {
   "name": "keras-graph",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "An Electron application",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
+    "start": "electron -r babel-register .",
     "dev": "electron . --debug"
   },
   "repository": "https://github.com/wangqianwen0418/keras-graph",
@@ -21,6 +21,11 @@
   },
   "dependencies": {
     "electron-devtools-installer": "^2.2.0",
-    "electron-reload": "^1.2.1"
+    "electron-reload": "^1.2.1",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babel-register": "^6.3.13",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2"
   }
 }
