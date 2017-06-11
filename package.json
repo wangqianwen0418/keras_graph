@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron -r babel-register .",
-    "dev": "webpack-dev-server -d --hot --env.dev",
+    "dev": "webpack --watch",
     "build": "webpack -p"
   },
   "repository": "https://github.com/wangqianwen0418/keras-graph",
@@ -18,7 +18,9 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
+    "css-loader": "^0.28.4",
     "electron": "~1.6.2",
+    "style-loader": "^0.18.2",
     "webpack": "^2.6.1"
   },
   "dependencies": {

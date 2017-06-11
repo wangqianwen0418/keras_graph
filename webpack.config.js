@@ -1,20 +1,28 @@
 var path = require('path');
 
 module.exports = {
-  entry: './src/scripts/main.js',
+  entry: './src/scripts/app.js',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist')
   },
+  devServer: {
+    hot: true, // Tell the dev-server we're using HMR
+    contentBase: path.resolve(__dirname, 'dist'),
+    publicPath: '/'
+  },
+  resolve:{
+      extensions:['.js','.jsx', '.json', '.css']
+  },
   module: {
       rules: [{
-          test: /\.js$/,
+          test: /\.js|jsx$/,
           exclude: /node_modules/,
           use: ['babel-loader']
-      },{
-          test: /\.jsx$/,
-          use: ['babel-loader']
-      }]
+      }, {
+            test: /\.css$/,
+            use: [ 'style-loader', 'css-loader' ]
+        }]
   }
 };
 
