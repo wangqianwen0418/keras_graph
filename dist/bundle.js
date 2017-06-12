@@ -9514,16 +9514,22 @@ function getIteratorFn(maybeIterable) {
 module.exports = getIteratorFn;
 
 /***/ }),
-/* 81 */
+/* 81 */,
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-'use babel';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+module.exports = __webpack_require__(115);
+
+
+/***/ }),
+/* 83 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -9531,7 +9537,17 @@ var _react = __webpack_require__(50);
 
 var _react2 = _interopRequireDefault(_react);
 
-__webpack_require__(185);
+var _reactDom = __webpack_require__(82);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _CodeView = __webpack_require__(191);
+
+var _CodeView2 = _interopRequireDefault(_CodeView);
+
+var _GraphView = __webpack_require__(194);
+
+var _GraphView2 = _interopRequireDefault(_GraphView);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -9551,17 +9567,13 @@ var Main = function (_React$Component) {
   }
 
   _createClass(Main, [{
-    key: 'render',
+    key: "render",
     value: function render() {
       return _react2.default.createElement(
-        'div',
-        { className: 'mainView' },
-        _react2.default.createElement(
-          'h1',
-          null,
-          'Have a nice day'
-        ),
-        'Hello from React with ES6 :)'
+        "div",
+        null,
+        _react2.default.createElement(_CodeView2.default, null),
+        _react2.default.createElement(_GraphView2.default, null)
       );
     }
   }]);
@@ -9569,58 +9581,12 @@ var Main = function (_React$Component) {
   return Main;
 }(_react2.default.Component);
 
-exports.default = Main;
-
-/***/ }),
-/* 82 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = __webpack_require__(115);
-
-
-/***/ }),
-/* 83 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _react = __webpack_require__(50);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactDom = __webpack_require__(82);
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
-var _mainView = __webpack_require__(81);
-
-var _mainView2 = _interopRequireDefault(_mainView);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 window.onload = function () {
-  _reactDom2.default.render(_react2.default.createElement(_mainView2.default, null), document.getElementById('app'));
+  _reactDom2.default.render(_react2.default.createElement(Main, null), document.getElementById("app"));
 };
 
 /***/ }),
-/* 84 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(85)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, "  h1 {\n    color: red;\n    margin: 0; \n    padding: 0;\n  }", ""]);
-
-// exports
-
-
-/***/ }),
+/* 84 */,
 /* 85 */
 /***/ (function(module, exports) {
 
@@ -22190,37 +22156,7 @@ module.exports = traverseAllChildren;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 185 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(84);
-if(typeof content === 'string') content = [[module.i, content, '']];
-// Prepare cssTransformation
-var transform;
-
-var options = {}
-options.transform = transform
-// add the styles to the DOM
-var update = __webpack_require__(186)(content, options);
-if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
-if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!../../node_modules/css-loader/index.js!./mainView.css", function() {
-			var newContent = require("!!../../node_modules/css-loader/index.js!./mainView.css");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
-	module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
+/* 185 */,
 /* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -22673,6 +22609,167 @@ module.exports = function (css) {
 	return fixedCss;
 };
 
+
+/***/ }),
+/* 188 */,
+/* 189 */,
+/* 190 */,
+/* 191 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+'use babel';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(50);
+
+var _react2 = _interopRequireDefault(_react);
+
+__webpack_require__(193);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var CodeView = function (_React$Component) {
+  _inherits(CodeView, _React$Component);
+
+  function CodeView() {
+    _classCallCheck(this, CodeView);
+
+    return _possibleConstructorReturn(this, (CodeView.__proto__ || Object.getPrototypeOf(CodeView)).apply(this, arguments));
+  }
+
+  _createClass(CodeView, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'CodeView' },
+        _react2.default.createElement(
+          'h1',
+          null,
+          'Have a nice day'
+        ),
+        'Hello from React with ES6 :)'
+      );
+    }
+  }]);
+
+  return CodeView;
+}(_react2.default.Component);
+
+exports.default = CodeView;
+
+/***/ }),
+/* 192 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(85)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "  body{\r\n    background-color: black;\r\n    color: white;\r\n  }\r\n  .CodeView {\r\n    width: 0.5vw;\r\n  }\r\n  .GraphView {\r\n    width: 0.5vw;\r\n    border: 2px solid white;\r\n  }", ""]);
+
+// exports
+
+
+/***/ }),
+/* 193 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(192);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(186)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../node_modules/css-loader/index.js!./CodeView.css", function() {
+			var newContent = require("!!../../node_modules/css-loader/index.js!./CodeView.css");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 194 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(50);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var GraphView = function (_React$Component) {
+  _inherits(GraphView, _React$Component);
+
+  function GraphView() {
+    _classCallCheck(this, GraphView);
+
+    return _possibleConstructorReturn(this, (GraphView.__proto__ || Object.getPrototypeOf(GraphView)).apply(this, arguments));
+  }
+
+  _createClass(GraphView, [{
+    key: "render",
+    value: function render() {
+      return _react2.default.createElement(
+        "div",
+        { className: "GraphView" },
+        _react2.default.createElement(
+          "h1",
+          null,
+          "Have a nice day"
+        ),
+        "Hello from React with ES6 :)"
+      );
+    }
+  }]);
+
+  return GraphView;
+}(_react2.default.Component);
+
+exports.default = GraphView;
 
 /***/ })
 /******/ ]);

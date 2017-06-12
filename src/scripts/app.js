@@ -1,7 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import MainView from '../views/mainView.jsx';
+import React from "react";
+import ReactDOM from "react-dom";
+import CodeView from "./CodeView";
+import GraphView from "./GraphView";
 
-window.onload = function(){
-  ReactDOM.render(<MainView />, document.getElementById('app'));
+class Main extends React.Component {
+  render() {
+    return (
+      <div>
+        <CodeView />
+        <GraphView />
+      </div>
+    );
+  }
 }
+
+window.onload = function() {
+  ReactDOM.render(<Main/>, document.getElementById("app"));
+};
