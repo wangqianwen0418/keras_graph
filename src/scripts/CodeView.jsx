@@ -1,14 +1,27 @@
-'use babel';
+"use babel";
 
-import React from 'react';
-import '../css/CodeView';
+import React from "react";
+import brace from "brace";
+import AceEditor from "react-ace";
+import "brace/mode/javascript";
+import "brace/theme/monokai";
 
 export default class CodeView extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  onChange(newValue) {
+    console.log("change", newValue);
+  }
   render() {
-    return <div className="CodeView">
-      <h1>Have a nice day</h1>
-      Hello from React with ES6 :)
-
-    </div>;
+    return (
+      <AceEditor
+        mode="javascript"
+        theme="monokai"
+        onChange={this.onChange}
+        name="UNIQUE_ID_OF_DIV"
+        editorProps={{ $blockScrolling: true }}
+      />
+    );
   }
 }

@@ -4,9 +4,8 @@
   "description": "An Electron application",
   "main": "main.js",
   "scripts": {
-    "start": "electron -r babel-register .",
-    "dev": "webpack --watch",
-    "build": "webpack -p"
+    "start": "electron .",
+    "dev": "webpack --watch"
   },
   "repository": "https://github.com/wangqianwen0418/keras-graph",
   "keywords": [
@@ -31,6 +30,8 @@
     "electron-devtools-installer": "^2.2.0",
     "electron-reload": "^1.2.1",
     "react": "^15.3.2",
+    "react-ace": "^5.0.1",
+    "react-bootstrap": "^0.31.0",
     "react-dom": "^15.3.2"
   }
 }
