@@ -14,6 +14,7 @@ import {changeCode} from '../actions';
         onChange={(value) => onChangeCode(value)}
         name="CodeView"
         value={code}
+        fontSize={15}
         editorProps={{ $blockScrolling: true }}
       />
     );

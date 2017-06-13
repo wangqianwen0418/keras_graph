@@ -5,7 +5,7 @@ first, run
 > $ npm install
 
 then
-> $ npm run build
+> $ npm run dev
 
-then
+then, open another terminal, run 
 > $ npm start

@@ -1,12 +1,20 @@
 const initialState = {
   content: `from keras.models import Sequential
+
+model = Sequential()
+
 from keras.layers import Dense, Activation
-model = Sequential([
-            Dense(32, input_shape=(784,)),
-            Activation('relu'),
-            Dense(10),
-            Activation('softmax'),
-        ])`
+
+model.add(Dense(units=64, input_dim=100))
+model.add(Activation('relu'))
+model.add(Dense(units=10))
+model.add(Activation('softmax'))
+
+model.compile(loss='categorical_crossentropy',
+              optimizer='sgd',
+              metrics=['accuracy'])
+
+model.train_on_batch(x_batch, y_batch)`
 }
 const codeApp = (state = initialState, action) => {
   switch (action.type) {
