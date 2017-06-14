@@ -64134,20 +64134,32 @@ var GraphView = function (_React$Component) {
             // var height = api.size([0, 1])[1] * 0.6;
             console.info(api.value(1));
             return {
-              type: 'rect',
-              name: 'layer',
-              shape: {
-                x: 30,
-                y: api.value(1) * 40,
-                width: 190,
-                height: 30
-              },
-              style: {
-                fill: '#fff'
-              },
-              onclick: function onclick() {
-                console.info(click);
-              }
+              type: 'group',
+              children: [{
+                type: 'rect',
+                name: 'layer',
+                shape: {
+                  x: 30,
+                  y: api.value(1) * 40,
+                  width: 190,
+                  height: 30
+                },
+                style: {
+                  fill: '#fff'
+                },
+                onclick: function onclick() {
+                  console.info(click);
+                }
+              }, {
+                type: 'text',
+                z: 100,
+                style: {
+                  fill: '#333',
+                  text: api.value(2),
+                  x: 40,
+                  y: api.value(1) * 40 + 15
+                }
+              }]
             };
           },
           data: layers.map(function (d, i) {
