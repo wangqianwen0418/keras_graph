@@ -4,7 +4,12 @@ const initialState = {
 model = Sequential()
 
 from keras.layers import Dense, Activation
-
+model = Sequential([
+    Dense(32, input_shape=(784,)),
+    Activation('relu'),
+    Dense(10),
+    Activation('softmax'),
+])
 model.add(Dense(units=64, input_dim=100))
 model.add(Activation('relu'))
 model.add(Dense(units=10))

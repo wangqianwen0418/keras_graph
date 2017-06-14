@@ -4,7 +4,7 @@ import GraphView from "../components/GraphView";
 
 const mapStateToProps = state => {
   return {
-    graph: getGraph(state.content)
+    layers: getLayers(state.content)
   };
 };
 
@@ -15,12 +15,16 @@ const mapStateToProps = state => {
 //     }
 //   }
 // }
-const getGraph = content => {
-  let myRegex = /model\.add\(([^)]+)\)\)/g;
+const getLayers = content => {
+  let addReg = /model\.add\(([^)]+)\)\)/g;
+  let seqReg = /Sequential\(\[(^}\]+)\]\)/;
   let arr;
   let result = [];
+  if((arr = seqReg.exec(content))!== null){
+    let layers = arr[0]
+  } 
 
-  while ((arr = myRegex.exec(content)) !== null) {
+  while ((arr = addReg.exec(content)) !== null) {
     // result.push(content[arr.index]);
     result.push(arr[0])
   }
