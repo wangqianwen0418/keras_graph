@@ -1,18 +1,27 @@
 import React from "react";
 import { connect } from 'react-redux';
-
+import ReactEcharts from 'echarts-for-react';
 export default class GraphView extends React.Component {
-  draw() {
-    let allCode = this.props.graph
-    while(allCode.search('add')!=-1){
-      
+  getOption() {
+    let graphics = this.props.graph.map(d => {
+      return {
+        type: 'rect',
+        // name: /\(([^)]+)\)/.exec(d)[0]
+      }
+    })
+    let option = {
+      'graphic': graphics
     }
+    return option
+    
   }
   render() {
     return (
       <div id="GraphView" >
         <h1>Have a nice day</h1>
-        {this.props.graph}
+        <ReactEcharts
+        option={this.getOption()}
+        />
       </div>
     );
   }

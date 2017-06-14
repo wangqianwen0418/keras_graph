@@ -27,6 +27,7 @@
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
     "babel-register": "^6.3.13",
+    "echarts-for-react": "^1.4.3",
     "electron-devtools-installer": "^2.2.0",
     "electron-reload": "^1.2.1",
     "prop-types": "^15.5.10",
