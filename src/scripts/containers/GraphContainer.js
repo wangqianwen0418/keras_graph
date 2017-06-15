@@ -26,7 +26,10 @@ const getLayers = content => {
 
   while ((arr = addReg.exec(content)) !== null) {
     // result.push(content[arr.index]);
-    result.push(arr[0])
+    let layer = arr[0].split('add')[1]
+    let name = layer.split('(')[1]
+    let pars = layer.split('(')[2]
+    result.push({name, pars})
   }
 
   return result

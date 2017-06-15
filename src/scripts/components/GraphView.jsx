@@ -1,70 +1,92 @@
 import React from "react";
-import echarts from 'echarts';
-import { connect } from 'react-redux';
-import ReactEcharts from 'echarts-for-react';
+import echarts from "echarts";
+import { connect } from "react-redux";
+import ReactEcharts from "echarts-for-react";
+import {getLayerColor} from '../assets/layers'
 export default class GraphView extends React.Component {
+  constructor(props) {
+    super(props)
+    this.getOption = this.getOption.bind(this)
+    this.layerOnclick = this.layerOnclick.bind(this) 
+    let data = this.props.layers.map((d, i) => [0, i, d.name, d.pars]);
+    this.state = {data}
+  }
   getOption() {
-    const layers = this.props.layers
+    
     let option = {
       xAxis: {
-        type: 'value',
+        type: "value",
         show: false
       },
       yAxis: {
-        type: 'value',
+        type: "value",
         show: false
       },
-      series: [{
-        type: 'custom',
-        renderItem: function (params, api) {
-          // var categoryIndex = api.value(0);
-          // var start = api.coord([api.value(1), categoryIndex]);
-          // var end = api.coord([api.value(2), categoryIndex]);
-          // var height = api.size([0, 1])[1] * 0.6;
-          console.info(api.value(1))
-          return {
-            type: 'group',
-            children: [{
-              type: 'rect',
-              name: 'layer',
-              shape: {
-                x: 30,
-                y: api.value(1) * 40,
-                width: 190,
-                height: 30
-              },
-              style: {
-                fill: '#fff'
-              },
-              onclick: function () {
-                console.info(click)
-              }
-            },
-            {
-              type: 'text',
-              z: 100,
-              style: {
-                fill: '#333',
-                text: api.value(2),
-                x: 40,
-                y: api.value(1) * 40 + 15
-              }
-            }]
-          }
-        },
-        data: layers.map((d, i) => [0, i, d])
-      }]
-    }
-    return option
-
+      series: [
+        {
+          type: "custom",
+          tooltip: {
+            trigger: "item",
+            formatter: "a layer"
+          },
+          renderItem: function(params, api) {
+            return {
+              type: "group",
+              children: [
+                {
+                  type: "rect",
+                  name: "layer",
+                  $action: 'merge',
+                  shape: {
+                    x: 30,
+                    y: api.value(1) * 40,
+                    width: 190,
+                    height: 30
+                  },
+                  onclick: ()=>{console.info('click')},
+                  style: {
+                    fill: getLayerColor(api.value(2)),
+                    lineWidth: 2,
+                    stroke: '#fff'
+                  }
+                },
+                {
+                  type: "text",
+                  z: 100,
+                  style: {
+                    fill: "#fff",
+                    text: api.value(2),
+                    textAlign: 'center',
+                    x: 130,
+                    y: api.value(1) * 40 + 15,
+                    font: '15px "STHeiti", sans-serif',
+                    lineWidth: 5
+                  }
+                }
+              ]
+            };
+          },
+          data: this.state.data
+        }
+      ]
+    };
+    return option;
+  }
+  layerOnclick(d) {
+    let option = this.getOption()
+    let newData = option.series[0].data
+    newData[d.dataIndex] = d.data.map((d, i)=>i==1?d*1.5:d)
+    console.info(newData)
+    this.setState({newData})
   }
   render() {
+    let onEvents = {
+      click: this.layerOnclick
+    };
     return (
-      <div id="GraphView" >
+      <div id="GraphView">
         <h1>Have a nice day</h1>
-        <ReactEcharts
-          option={this.getOption()}
-        />
+        <ReactEcharts onEvents={onEvents} option={this.getOption()} />
       </div>
     );
   }
