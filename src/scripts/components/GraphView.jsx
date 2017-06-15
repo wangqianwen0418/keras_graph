@@ -9,9 +9,10 @@ export default class GraphView extends React.Component {
     this.getOption = this.getOption.bind(this)
     this.layerOnclick = this.layerOnclick.bind(this) 
     let data = this.props.layers.map((d, i) => [0, i, d.name, d.pars]);
-    this.state = {data}
+    let option = this.getOption(data)
+    this.state = {option}
   }
-  getOption() {
+  getOption(data) {
     
     let option = {
       xAxis: {
@@ -66,18 +67,21 @@ export default class GraphView extends React.Component {
               ]
             };
           },
-          data: this.state.data
+          data
         }
       ]
     };
     return option;
   }
   layerOnclick(d) {
-    let option = this.getOption()
+    let option = this.state.option
     let newData = option.series[0].data
     newData[d.dataIndex] = d.data.map((d, i)=>i==1?d*1.5:d)
-    console.info('aaa')
-    this.setState({newData})
+    option.series.push({
+      type: 'bar',
+      data: [[4, 5]]
+    })
+    this.setState({option})
   }
   render() {
     let onEvents = {
@@ -86,7 +90,7 @@ export default class GraphView extends React.Component {
     return (
       <div id="GraphView">
         <h1>Have a nice day</h1>
-        <ReactEcharts onEvents={onEvents} option={this.getOption()} />
+        <ReactEcharts onEvents={onEvents} option={this.state.option} />
       </div>
     );
   }
