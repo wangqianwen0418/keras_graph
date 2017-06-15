@@ -76,7 +76,7 @@ export default class GraphView extends React.Component {
     let option = this.getOption()
     let newData = option.series[0].data
     newData[d.dataIndex] = d.data.map((d, i)=>i==1?d*1.5:d)
-    console.info(newData)
+    console.info('aaa')
     this.setState({newData})
   }
   render() {
