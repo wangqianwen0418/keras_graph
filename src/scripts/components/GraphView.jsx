@@ -83,42 +83,42 @@ export default class GraphView extends React.Component {
       // 这里使用了 echarts.util.map 这个帮助方法，其行为和 Array.prototype.map 一样，但是兼容 es5 以下的环境。
       // 用 map 方法遍历 data 的每项，为每项生成一个圆点。
       let option = this.state.option
-      newOption={
+      let self = this
+      let newOption={
         ...option,
-        graphic: echarts.util.map(this.data, function (dataItem, dataIndex) {
+        graphic: this.data.map((dataItem, dataIndex) => {
           return {
             type: 'rect',
             shape: {
               width: 190,
-              height: 30
+              height: 30,
+
+            },
+            style: {
+              fill: '#fff'
             },
             // 用 transform 的方式对圆点进行定位。position: [x, y] 表示将圆点平移到 [x, y] 位置。
             // 这里使用了 convertToPixel 这个 API 来得到每个圆点的位置，下面介绍。
-            position: myChart.convertToPixel('grid', dataItem),
+            position: this.myChart.convertToPixel('grid', dataItem),
             // invisible: true,
             draggable: true,
             z: 100,
-            ondrag: echarts.util.curry(onDragging, dataIndex)
+            ondrag: echarts.util.curry(this.onDragging, dataIndex)
           };
         })}
     this.setState({ option: newOption })
   }
 
   onDragging(dataIndex) {
-    // 这里的 data 就是本文最初的代码块中声明的 data，在这里会被更新。
-    // 这里的 this 就是被拖拽的圆点。this.position 就是圆点当前的位置。
+    let data = this.data
+    let self = this
     data[dataIndex] = [
-      ...myChart.convertFromPixel('grid', this.position),
-      data[2],
-      data[3]
+      ...self.myChart.convertFromPixel('grid', self.position),
+      data[dataIndex][2],
+      data[dataIndex][3]
     ]
     // 用更新后的 data，重绘折线图。
-    myChart.setOption({
-      series: [{
-        id: 'a',
-        data: data
-      }]
-    });
+    this.setState({data})
   }
 
   layerOnclick(d) {
@@ -132,8 +132,8 @@ export default class GraphView extends React.Component {
     this.setState({ option })
   }
   componentDidMount() {
-    // this.addDragEvent()
-    let myChart = this.refs.echarts_react.getEchartsInstance()
+    this.myChart = this.eChart.getEchartsInstance()
+    this.addDragEvent()
   }
   render() {
     let onEvents = {
@@ -151,7 +151,7 @@ export default class GraphView extends React.Component {
       <div id="GraphView">
         <h1>Have a nice day</h1>
         <ReactEcharts
-         ref='echarts_react'
+         ref={e=>{this.eChart=e}}
          onEvents={onEvents}
          option={this.state.option}
        />
