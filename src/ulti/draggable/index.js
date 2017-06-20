@@ -8,7 +8,7 @@ export default function draggable(Component) {
   var updateEdge = true;
 
   //return React.createClass({
-  class Sortable extends React.Component {
+  return class Sortable extends React.Component {
     state = { draggingIndex: null };
 
     componentWillReceiveProps(nextProps) {

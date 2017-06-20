@@ -9,21 +9,21 @@ export default class Layer extends Component {
     this.onMouseMove = this.onMouseMove.bind(this);
     this.onMouseUp = this.onMouseUp.bind(this);
     this.state = {
-      relX: 0,
-      relY: 0
+      x: 0,
+      y: 0
     };
   }
   onMouseDown(e) {
-    if (e.button !== 0) return;
-    const ref = ReactDOM.findDOMNode(this.handle);
-    const body = document.body;
-    const box = ref.getBoundingClientRect();
+    // const ref = ReactDOM.findDOMNode(this.handle);
+    // const body = document.body;
+    // const box = ref.getBoundingClientRect();
+    // console.info(e.pageX - (box.left + body.scrollLeft - body.clientLeft))
     this.setState({
-      relX: e.pageX - (box.left + body.scrollLeft - body.clientLeft),
-      relY: e.pageY - (box.top + body.scrollTop - body.clientTop)
+      relX: e.pageX,
+      relY: e.pageY
     });
     document.addEventListener("mousemove", this.onMouseMove);
-    document.addEventListener("mouseup", this.onMouseUp);
+    document.addEventListener("mouseup", this.onMouseUp);    
     e.preventDefault();
   }
   onMouseUp(e) {
@@ -48,12 +48,16 @@ export default class Layer extends Component {
           width: "150px",
           backgroundColor: getLayerColor(layer.name),
           margin: "5px",
-          color: "#000",
-          position:'relative',
-          left:'this.state.x',
-          top:'this.state.y'
+          padding:'5px',
+          textAlign:'center',
+          color: "#fff",
+          transform: `translate(${this.state.x}px, ${this.state.y}px)`,
+          borderRadius:'4px'
         }}
+        draggable='true'
         onMouseDown={this.onMouseDown}
+        /*onMouseMove={this.onMouseMove}
+        onMouseUp={this.onMouseUp}*/
         ref={e => {
           this.handle = e;
         }}
