@@ -17,6 +17,7 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
+    "babel-plugin-transform-decorators": "^6.24.1",
     "css-loader": "^0.28.4",
     "electron": "~1.6.2",
     "style-loader": "^0.18.2",
