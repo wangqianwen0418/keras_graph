@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import { changeGraph } from "../actions";
-import GraphView from "../components/GraphView";
+import GraphView from "../components/GraphView2";
+
 
 const mapStateToProps = state => {
   return {
@@ -8,13 +9,14 @@ const mapStateToProps = state => {
   };
 };
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     onTodoClick: (code) => {
-//       dispatch(toggleTodo(id))
-//     }
-//   }
-// }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onChangeGraph: (layers) => {
+      dispatch(changeGraph(layers))
+    }
+  }
+}
+
 const getLayers = content => {
   let addReg = /model\.add\(([^)]+)\)\)/g;
   let seqReg = /Sequential\(\[(^}\]+)\]\)/;
@@ -36,6 +38,6 @@ const getLayers = content => {
 
 };
 
-const GraphContainer = connect(mapStateToProps)(GraphView);
+const GraphContainer = connect(mapStateToProps, mapDispatchToProps)(GraphView);
 
 export default GraphContainer;

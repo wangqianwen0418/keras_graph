@@ -1,6 +1,5 @@
 import React from "react";
 import echarts from "echarts";
-import { connect } from "react-redux";
 import ReactEcharts from "echarts-for-react";
 import { getLayerColor } from '../assets/layers'
 export default class GraphView extends React.Component {
