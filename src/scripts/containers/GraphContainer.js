@@ -25,13 +25,14 @@ const getLayers = content => {
   if((arr = seqReg.exec(content))!== null){
     let layers = arr[0]
   } 
-
+  let index = 0
   while ((arr = addReg.exec(content)) !== null) {
     // result.push(content[arr.index]);
     let layer = arr[0].split('add')[1]
     let name = layer.split('(')[1]
     let pars = layer.split('(')[2]
-    result.push({name, pars})
+    result.push({name, pars, index})
+    index+=1
   }
 
   return result

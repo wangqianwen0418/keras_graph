@@ -14,13 +14,17 @@ export default class GraphView extends Component {
     super(props);
   }
   render() {
+    let layers = this.props.layers
+    let length = layers.length
+    let order = layers.map(layer=>layer.index)
     return (
       <div id="GraphView">
-        {this.props.layers.map((d, i) => {
+        {[...Array(length).keys()].map(i => {
           return (
             <Layer
             key = {'layer'+i}
-            layer={d}
+            order = {order}
+            layer={layers[i]}
             />
           );
         })}

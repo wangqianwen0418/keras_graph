@@ -20,8 +20,10 @@ export default class Layer extends Component {
     // console.info(e.pageX - (box.left + body.scrollLeft - body.clientLeft))
     this.setState({
       relX: e.pageX,
-      relY: e.pageY
+      relY: e.pageY,
+      from: this.props.layer.index
     });
+    console.info(this.props.order)
     document.addEventListener("mousemove", this.onMouseMove);
     document.addEventListener("mouseup", this.onMouseUp);    
     e.preventDefault();
@@ -30,16 +32,24 @@ export default class Layer extends Component {
     document.removeEventListener("mousemove", this.onMouseMove);
     document.removeEventListener("mouseup", this.onMouseUp);
     e.preventDefault();
+    this.setState({
+      x:0,
+      y:0
+    })
+  }
+  changeOrder(from, delta){
+
   }
   onMouseMove(e) {
+    let delta = Math.floor((e.pageY - this.state.relY)/35)
     this.setState({
       x: e.pageX - this.state.relX,
-      y: e.pageY - this.state.relY
+      y: e.pageY - this.state.relY,
+      delta
     });
     e.preventDefault();
   }
   render() {
-      console.info('a')
     const layer = this.props.layer;
     return (
       <div
