@@ -12,3 +12,11 @@ export const changeGraph = (graph) => {
   }
 }
 
+export const moveLayers = (from, to) => {
+  return {
+    type: 'MOVE_LAYERS',
+    from,
+    to,
+  }
+}
+

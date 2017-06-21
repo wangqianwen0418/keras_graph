@@ -10,47 +10,47 @@ export default class Layer extends Component {
     this.onMouseUp = this.onMouseUp.bind(this);
     this.state = {
       x: 0,
-      y: 0
+      y: 0,
+      from: this.props.layer.index,
+      layer: this.props.layer
     };
   }
   onMouseDown(e) {
-    // const ref = ReactDOM.findDOMNode(this.handle);
-    // const body = document.body;
-    // const box = ref.getBoundingClientRect();
-    // console.info(e.pageX - (box.left + body.scrollLeft - body.clientLeft))
     this.setState({
       relX: e.pageX,
       relY: e.pageY,
-      from: this.props.layer.index
+      from: this.props.index
     });
-    console.info(this.props.order)
     document.addEventListener("mousemove", this.onMouseMove);
-    document.addEventListener("mouseup", this.onMouseUp);    
+    document.addEventListener("mouseup", this.onMouseUp);
     e.preventDefault();
   }
   onMouseUp(e) {
+    const { from, to } = this.state
+    this.reOrder(from, to)
     document.removeEventListener("mousemove", this.onMouseMove);
     document.removeEventListener("mouseup", this.onMouseUp);
     e.preventDefault();
     this.setState({
-      x:0,
-      y:0
+      x: 0,
+      y: 0,
     })
   }
-  changeOrder(from, delta){
-
+  reOrder(from, to) {
+    this.props.reOrder(from, to)
   }
   onMouseMove(e) {
-    let delta = Math.floor((e.pageY - this.state.relY)/35)
+    let { from, relX, relY } = this.state
+    let to = Math.round((e.pageY - relY) / 35) + from
     this.setState({
-      x: e.pageX - this.state.relX,
-      y: e.pageY - this.state.relY,
-      delta
+      x: e.pageX - relX,
+      y: e.pageY - relY,
+      to
     });
     e.preventDefault();
   }
   render() {
-    const layer = this.props.layer;
+    const { layer } = this.props
     return (
       <div
         style={{
@@ -58,19 +58,20 @@ export default class Layer extends Component {
           width: "150px",
           backgroundColor: getLayerColor(layer.name),
           margin: "5px",
-          padding:'5px',
-          textAlign:'center',
+          padding: '5px',
+          textAlign: 'center',
           color: "#fff",
           transform: `translate(${this.state.x}px, ${this.state.y}px)`,
-          borderRadius:'4px'
+          borderRadius: '4px'
         }}
         draggable='true'
+        className={this.props.index}
         onMouseDown={this.onMouseDown}
-        /*onMouseMove={this.onMouseMove}
-        onMouseUp={this.onMouseUp}*/
-        ref={e => {
-          this.handle = e;
-        }}
+      /*onMouseMove={this.onMouseMove}
+      onMouseUp={this.onMouseUp}*/
+      /*ref={e => {
+        this.handle = e;
+      }}*/
       >
         {layer.name}
       </div>

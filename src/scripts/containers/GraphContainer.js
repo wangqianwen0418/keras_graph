@@ -1,43 +1,25 @@
 import { connect } from "react-redux";
-import { changeGraph } from "../actions";
+import { moveLayers } from "../actions";
 import GraphView from "../components/GraphView2";
 
 
 const mapStateToProps = state => {
+  console.info(state.layers)
   return {
-    layers: getLayers(state.content)
+    // layers: getLayers(state.content)
+    layers: state.layers
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onChangeGraph: (layers) => {
-      dispatch(changeGraph(layers))
+    reOrder: (from, to) => {
+      dispatch(moveLayers(from, to))
     }
   }
 }
 
-const getLayers = content => {
-  let addReg = /model\.add\(([^)]+)\)\)/g;
-  let seqReg = /Sequential\(\[(^}\]+)\]\)/;
-  let arr;
-  let result = [];
-  if((arr = seqReg.exec(content))!== null){
-    let layers = arr[0]
-  } 
-  let index = 0
-  while ((arr = addReg.exec(content)) !== null) {
-    // result.push(content[arr.index]);
-    let layer = arr[0].split('add')[1]
-    let name = layer.split('(')[1]
-    let pars = layer.split('(')[2]
-    result.push({name, pars, index})
-    index+=1
-  }
 
-  return result
-
-};
 
 const GraphContainer = connect(mapStateToProps, mapDispatchToProps)(GraphView);
 
