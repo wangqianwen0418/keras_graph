@@ -4,7 +4,6 @@ import GraphView from "../components/GraphView2";
 
 
 const mapStateToProps = state => {
-  console.info(state.layers)
   return {
     // layers: getLayers(state.content)
     layers: state.layers

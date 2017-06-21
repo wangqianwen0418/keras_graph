@@ -83,7 +83,6 @@ function reOrder(from, to, layers) {
     let temp = newLayers[to]
     newLayers[to] = newLayers[from]
     newLayers[from] = temp
-    console.info(from, to, newLayers)
     return newLayers
 }
 export default codeApp;

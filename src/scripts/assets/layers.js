@@ -1,14 +1,12 @@
 export const COLORS = [
-'#1f78b4',
-'#b2df8a',
-'#33a02c',
-'#fb9a99',
-'#e31a1c',
-'#fdbf6f',
-'#ff7f00',
-'#cab2d6',
-'#6a3d9a',
-'#ffff99'
+'#87f7cf',
+'#f7f494',
+'#72ccff',
+'#f7c5a0',
+'#fc97af',
+'#d4a4eb',
+'#d2f5a6',
+'#76f2f2',
 ];
 export const LAYERS = [
   "core",
@@ -25,9 +23,9 @@ export const LAYERS = [
 ];
 export const ALL_LAYERS = {
   Dense: 0,
-  Activation: 0,
-  Dropout: 0,
-  Faltten: 0,
+  Activation: 1,
+  Dropout: 2,
+  Faltten: 2,
   Reshape: 0,
   Permute: 0,
   RepeatVector: 0,

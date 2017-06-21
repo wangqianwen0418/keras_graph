@@ -12,6 +12,7 @@ export default class Layer extends Component {
     this.state = {
       x: 0,
       y: 0,
+      z: -1,
       from: this.props.layer.index,
       layer: this.props.layer,
       height:30,
@@ -23,7 +24,8 @@ export default class Layer extends Component {
     this.setState({
       relX: e.pageX,
       relY: e.pageY,
-      from: this.props.index
+      from: this.props.index,
+      z:1
     });
     document.addEventListener("mousemove", this.onDrag);
     document.addEventListener("mouseup", this.onDragEnd);
@@ -38,6 +40,7 @@ export default class Layer extends Component {
     this.setState({
       x: 0,
       y: 0,
+      z: -1
     })
   }
   reOrder(from, to) {
@@ -61,7 +64,8 @@ export default class Layer extends Component {
   }
   render() {
     const { layer } = this.props
-    const { x, y, height, width, fold } = this.state
+    const { x, y, height, width, fold, z } = this.state
+    console.info(z)
     let detail = <p>{fold?'':layer.pars}</p>
     return (
       <div
@@ -69,10 +73,13 @@ export default class Layer extends Component {
           height: `${height}px`,
           width: `${width}px`,
           backgroundColor: getLayerColor(layer.name),
+          zIndex: `${z}`,
           margin: "5px 40px",
           padding: '5px',
           textAlign: 'center',
-          color: "#fff",
+          color: "#333",
+          fontSize: '20px',
+          fontFamily:'sans-serif',
           transform: `translate(${x}px, ${y}px)`,
           borderRadius: '4px'
         }}
