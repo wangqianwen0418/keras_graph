@@ -7,16 +7,16 @@ body {
   height: 100%;
 }
 
-#GraphView, #CodeView {
-  width: 49vw !important;
+#GraphView, #CodeView{
   height: 100vh !important;
-  float: left;
+  width: 50vw !important;
 }
 .App {
   height: 100vh;
   width: 100vw;
   margin: 0;
   padding: 0;
+  display: inline-flex;
 }
 
 #editor {

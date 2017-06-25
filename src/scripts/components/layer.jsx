@@ -65,7 +65,6 @@ export default class Layer extends Component {
   render() {
     const { layer } = this.props
     const { x, y, height, width, fold, z } = this.state
-    console.info(z)
     let detail = <p>{fold?'':layer.pars}</p>
     return (
       <div
