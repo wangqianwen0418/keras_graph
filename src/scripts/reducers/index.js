@@ -30,7 +30,7 @@ const codeApp = (state = initialState, action) => {
 };
 
 function getLayers (content) {
-  let addReg = /model\.add\(([^)]+)\)\)/g;
+  let addReg = /model\.add\((.*)\)\)/g;
   let seqReg = /Sequential\(\[(^}\]+)\]\)/;
   let arr;
   let result = [];
@@ -40,9 +40,9 @@ function getLayers (content) {
   // let index = 0
   while ((arr = addReg.exec(content)) !== null) {
     // result.push(content[arr.index]);
-    let layer = arr[0].split('add')[1]
-    let name = layer.split('(')[1]
-    let pars = layer.split('(')[2].replace(/\)/g,'')
+    let layer = arr[0].split('add(')[1]
+    let name = layer.split('(')[0]
+    let pars = layer.split(name+'(')[1].replace(/\)\)/g,'')
     result.push({name, pars})
     // index+=1
   }
