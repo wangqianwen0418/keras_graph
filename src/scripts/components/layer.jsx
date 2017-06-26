@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { getLayerColor } from "../assets/layers";
+import { getLayerColor } from "../../assets/layers";
+import {layerStyle} from '../../style/styleObj';
 import ReactDOM from "react-dom";
 
 export default class Layer extends Component {
@@ -13,7 +14,6 @@ export default class Layer extends Component {
       x: 0,
       y: 0,
       z: -1,
-      from: this.props.layer.index,
       layer: this.props.layer,
       height:30,
       width:200,
@@ -68,22 +68,9 @@ export default class Layer extends Component {
     let detail = <p>{fold?'':layer.pars}</p>
     return (
       <div
-        style={{
-          height: `${height}px`,
-          width: `${width}px`,
-          backgroundColor: getLayerColor(layer.name),
-          zIndex: `${z}`,
-          margin: "5px 40px",
-          padding: '5px',
-          textAlign: 'center',
-          color: "#333",
-          fontSize: '20px',
-          fontFamily:'sans-serif',
-          transform: `translate(${x}px, ${y}px)`,
-          borderRadius: '4px'
-        }}
+        style={layerStyle(height, width, x, y, layer.name )}
         draggable='true'
-        className={this.props.index}
+        className={layer.name}
         onDragStart={this.onDragStart}
         onClick={this.onClick}
       /*onDrag={this.onDrag}
