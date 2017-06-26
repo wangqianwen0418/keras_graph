@@ -1,0 +1,7 @@
+{
+    // "python.pythonPath": "/Library/Frameworks/Python.framework/Versions/3.5/bin/python3"
+    "python.pythonPath": "${workspaceRoot}/parser/venv/bin/python3",
+    "python.linting.pylintPath": "${workspaceRoot}/parser/venv/bin/pylint",
+    "python.linting.pylintEnabled": true
+    // "python.linting.pylintEnabled": false
+}
