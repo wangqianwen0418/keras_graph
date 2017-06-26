@@ -1,7 +1,7 @@
 import React from "react";
 import CodeContainer from "../containers/CodeContainer";
 import GraphContainer from "../containers/GraphContainer";
-import '../../css/style';
+import '../../style/style';
 
 
 
