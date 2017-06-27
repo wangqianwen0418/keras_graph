@@ -1,6 +1,7 @@
 import { getLayerColor } from '../assets/layers';
-export const layerStyle = (height=30, width=200, x=0, y=0, name) => {
+export const layerStyle = (height=30, width=200, x=0, y=0, selected, name) => {
     return {
+        position:'relative',
         height: `${height}px`,
         width: `${width}px`,
         backgroundColor: getLayerColor(name),
@@ -11,6 +12,7 @@ export const layerStyle = (height=30, width=200, x=0, y=0, name) => {
         color: "#333",
         fontSize: '20px',
         fontFamily: 'sans-serif',
+        zIndex: selected?100:1,
         transform: `translate(${x}px, ${y}px)`,
         borderRadius: '5px',
         boxShadow: '2px 2px 1px #111'

@@ -49,7 +49,7 @@ export default class GraphView extends Component {
                 key={'layer' + i}
                 reOrder={this.reOrder}
                 layer={d}
-                index={i}
+                index={layers.indexOf(d)}
               />
             );
           })}
