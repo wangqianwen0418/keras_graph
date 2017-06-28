@@ -32,9 +32,10 @@ export default class GraphView extends Component {
           style={{
             fontSize: '20px',
             textAlign: 'center',
-            backgroundColor: '#666',
+            backgroundColor: 'white',
+            color: '#00838F',
             padding: '5px',
-            boxShadow: '2px 2px 2px #111',
+            boxShadow: '2px 2px 2px #666',
             width: this.graphView ? `${this.graphView.clientWidth}px` : '50vw'
           }}
         >
