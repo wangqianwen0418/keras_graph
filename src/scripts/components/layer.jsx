@@ -13,7 +13,7 @@ export default class Layer extends Component {
     this.state = {
       x: 0,
       y: 0,
-      z: -1,
+      selected: false,
       layer: this.props.layer,
       height:30,
       width:200,
@@ -25,7 +25,7 @@ export default class Layer extends Component {
       relX: e.pageX,
       relY: e.pageY,
       from: this.props.index,
-      z:1
+      selected: true,
     });
     document.addEventListener("mousemove", this.onDrag);
     document.addEventListener("mouseup", this.onDragEnd);
@@ -40,7 +40,7 @@ export default class Layer extends Component {
     this.setState({
       x: 0,
       y: 0,
-      z: -1
+      selected: false
     })
   }
   reOrder(from, to) {
@@ -54,6 +54,7 @@ export default class Layer extends Component {
       y: e.pageY - relY,
       to
     });
+    // this.reOrder(from, to)
     e.preventDefault();
   }
   onClick(){
@@ -64,11 +65,11 @@ export default class Layer extends Component {
   }
   render() {
     const { layer } = this.props
-    const { x, y, height, width, fold, z } = this.state
+    const { x, y, height, width, fold, selected } = this.state
     let detail = <p>{fold?'':layer.pars}</p>
     return (
       <div
-        style={layerStyle(height, width, x, y, layer.name )}
+        style={layerStyle(height, width, x, y, selected, layer.name )}
         draggable='true'
         className={layer.name}
         onDragStart={this.onDragStart}
