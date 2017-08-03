@@ -9,12 +9,12 @@ Gets to 99.5% test accuracy after 20 epochs.
 '''
 from __future__ import absolute_import
 from __future__ import print_function
-import numpy as np
-
 import random
+import json
+import numpy as np
 from keras.datasets import mnist
-from keras.models import Sequential, Model
-from keras.layers import Dense, Dropout, Input, Lambda
+from keras.models import Model
+from keras import layers
 from keras.optimizers import RMSprop
 from keras import backend as K
 
@@ -60,13 +60,13 @@ def create_pairs(x, digit_indices):
 def create_base_network(input_dim):
     '''Base network to be shared (eq. to feature extraction).
     '''
-    seq = Sequential()
-    seq.add(Dense(128, input_shape=(input_dim,), activation='relu'))
-    seq.add(Dropout(0.1))
-    seq.add(Dense(128, activation='relu'))
-    seq.add(Dropout(0.1))
-    seq.add(Dense(128, activation='relu'))
-    return seq
+    in_layer= layers.Input(shape=(input_dim,))
+    x = layers.Dense(128,activation='relu')(in_layer)
+    x = layers.Dropout(0.1)(x)
+    x = layers.Dense(128, activation='relu')(x)
+    x = layers.Dropout(0.1)(x)
+    out_layer = layers.Dense(128, activation='relu')(x)
+    return Model(in_layer, out_layer)
 
 
 def compute_accuracy(predictions, labels):
@@ -96,8 +96,8 @@ te_pairs, te_y = create_pairs(x_test, digit_indices)
 # network definition
 base_network = create_base_network(input_dim)
 
-input_a = Input(shape=(input_dim,))
-input_b = Input(shape=(input_dim,))
+input_a = layers.Input(shape=(input_dim,))
+input_b = layers.Input(shape=(input_dim,))
 
 # because we re-use the same instance `base_network`,
 # the weights of the network
@@ -105,24 +105,31 @@ input_b = Input(shape=(input_dim,))
 processed_a = base_network(input_a)
 processed_b = base_network(input_b)
 
-distance = Lambda(euclidean_distance,
+distance = layers.Lambda(euclidean_distance,
                   output_shape=eucl_dist_output_shape)([processed_a, processed_b])
 
 model = Model([input_a, input_b], distance)
 
+# save
+json_string = model.to_json()
+with open("minist_simase.json", "w") as json_file:
+    json.dump(json_string, json_file)
+json_file.close()
 # train
 rms = RMSprop()
 model.compile(loss=contrastive_loss, optimizer=rms)
-model.fit([tr_pairs[:, 0], tr_pairs[:, 1]], tr_y,
-          batch_size=128,
-          epochs=epochs,
-          validation_data=([te_pairs[:, 0], te_pairs[:, 1]], te_y))
 
-# compute final accuracy on training and test sets
-pred = model.predict([tr_pairs[:, 0], tr_pairs[:, 1]])
-tr_acc = compute_accuracy(pred, tr_y)
-pred = model.predict([te_pairs[:, 0], te_pairs[:, 1]])
-te_acc = compute_accuracy(pred, te_y)
 
-print('* Accuracy on training set: %0.2f%%' % (100 * tr_acc))
-print('* Accuracy on test set: %0.2f%%' % (100 * te_acc))
+# model.fit([tr_pairs[:, 0], tr_pairs[:, 1]], tr_y,
+#           batch_size=128,
+#           epochs=epochs,
+#           validation_data=([te_pairs[:, 0], te_pairs[:, 1]], te_y))
+
+# # compute final accuracy on training and test sets
+# pred = model.predict([tr_pairs[:, 0], tr_pairs[:, 1]])
+# tr_acc = compute_accuracy(pred, tr_y)
+# pred = model.predict([te_pairs[:, 0], te_pairs[:, 1]])
+# te_acc = compute_accuracy(pred, te_y)
+
+# print('* Accuracy on training set: %0.2f%%' % (100 * tr_acc))
+# print('* Accuracy on test set: %0.2f%%' % (100 * te_acc))
