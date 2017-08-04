@@ -1,4 +1,4 @@
 node_modules/
 bundle.js
 venv/
-vgg16/.json
+vgg16/*.json
