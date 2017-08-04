@@ -18,13 +18,18 @@ print(img.size, img.mode)
 
 model_origi = VGG16(weights='imagenet', include_top=True)
 
+outputs = {}
 weights = {}
 layer0 = model_origi.layers[0].input
 for layer in model_origi.layers:
     model_inter = Model(inputs=[layer0], outputs=[layer.output])
     pred = model_inter.predict(x)
-    weights[layer.name]=pred[0].tolist()
+    outputs[layer.name]=pred[0].tolist()
+    weights[layer.name]=[w.tolist() for w in layer.get_weights()]
     # print(pred[0].tolist())
+with open("outputs_vgg.json","w") as json_file:
+    json.dump(outputs, json_file)
+json_file.close()
 with open("weights_vgg.json","w") as json_file:
     json.dump(weights, json_file)
 json_file.close()

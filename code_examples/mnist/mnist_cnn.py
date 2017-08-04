@@ -71,10 +71,10 @@ def main():
         outputs[layer.name]=pred[0].tolist()
         weights[layer.name]=[w.tolist() for w in layer.get_weights()]
         # print(pred[0].tolist())
-    with open("outputs_vgg.json","w") as json_file:
+    with open("outputs_mnist.json","w") as json_file:
         json.dump(outputs, json_file)
     json_file.close()
-    with open("weights_vgg.json","w") as json_file:
+    with open("weights_mnist.json","w") as json_file:
         json.dump(weights, json_file)
     json_file.close()
 
